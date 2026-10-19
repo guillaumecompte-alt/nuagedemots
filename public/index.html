@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10152b">
+  <meta name="description" content="Créez un nuage de mots collaboratif avec votre classe.">
+  <title>Nuage de mots — Les idées de la classe</title>
+  <link rel="stylesheet" href="/styles.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <div class="site-shell">
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Nuage de mots, accueil">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+        <span>nuage<span class="brand-light">.</span></span>
+      </a>
+      <span class="topbar-note"><span class="live-dot"></span> L'intelligence du collectif</span>
+    </header>
+    <main id="app" aria-live="polite">
+      <div class="loading-screen"><span class="spinner"></span><p>Préparation de votre espace…</p></div>
+    </main>
+    <footer class="footer">
+      <span>Un mot après l'autre, les idées prennent forme.</span>
+      <span>Simple · Anonyme · Collectif</span>
+    </footer>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
