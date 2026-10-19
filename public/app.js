@@ -70,7 +70,7 @@ function cloudMarkup(words, emptyTitle = "Le nuage se construit", emptyMessage =
   const max = Math.max(...sorted.map((item) => item.count), 1);
   const min = Math.min(...sorted.map((item) => item.count), max);
   return sorted.map((item, index) => {
-    const ratio = max === min ? 1 : (item.count - min) / (max - min);
+    const ratio = max === min ? 0.35 : (item.count - min) / (max - min);
     const size = Math.round(15 + Math.sqrt(ratio) * 34);
     const color = PALETTE[index % PALETTE.length];
     return '<span class="cloud-item" style="font-size:' + size + 'px;color:' + color + '" title="' + item.count + (item.count > 1 ? ' occurrences' : ' occurrence') + '">' + escapeHtml(item.word) + '</span>';
