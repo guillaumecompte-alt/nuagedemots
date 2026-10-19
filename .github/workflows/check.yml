@@ -1,0 +1,24 @@
+name: Vérification du code
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Récupérer le dépôt
+        uses: actions/checkout@v4
+      - name: Installer Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Installer les dépendances
+        run: npm install --no-audit --no-fund
+      - name: Vérifier la syntaxe JavaScript
+        run: npm run check
+      - name: Vérifier la configuration Worker sans déployer
+        run: npx wrangler deploy --dry-run
