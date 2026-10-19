@@ -90,7 +90,7 @@ function landingPage() {
         <div class="hero-proof"><div class="avatar-stack" aria-hidden="true"><span>✦</span><span>✳</span><span>●</span></div><span>Sans compte élève · Réponses anonymes · Résultats en direct</span></div>
       </div>
       <div class="hero-art" aria-label="Exemple d'un nuage de mots">
-        <div class="art-bar"><span>APERÇU DU NUAD DE MOTS</span><span class="art-tag">Exemple</span></div>
+        <div class="art-bar"><span>APERÇU DU NUAGE DE MOTS</span><span class="art-tag">Exemple</span></div>
         <div class="demo-cloud">
           <span class="cloud-word w2">Liberté</span><span class="cloud-word w3">Égalité</span>
           <span class="cloud-word w1">Démocratie</span><span class="cloud-word w4">Vote</span>
