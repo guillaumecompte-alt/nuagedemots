@@ -1,35 +1,35 @@
 # Nuage de mots
 
-Une application web en français pour recueillir les mots d'une classe autour d'une question et afficher un nuage collectif. Les mots fréquemment proposés apparaissent plus gros.
+Application web en français pour créer des nuages de mots collaboratifs avec une classe. Plus un mot est proposé par des élèves différents, plus il apparaît gros.
 
 ## Fonctionnalités
 
-- Création d'une activité par l'enseignant avec une question et une limite de 2 ou 3 mots par réponse.
-- Lien élève distinct du lien enseignant.
-- Réponses anonymes, sans compte ni nom d'élève demandé.
-- Nuage agrégé actualisé automatiquement, aussi bien côté enseignant que côté élève.
-- Ouverture et fermeture des réponses, export CSV des fréquences.
-- Stockage partagé et persistant via Cloudflare Workers et Durable Objects.
+- Créer une activité avec une question et choisir une limite de 2 ou 3 mots par élève.
+- Envoyer un lien distinct aux élèves : pas de compte ni de nom demandé.
+- Afficher le nuage et le nombre de réponses, actualisés automatiquement.
+- Modifier sa réponse depuis le même navigateur.
+- Ouvrir ou fermer les réponses, effacer les contributions et exporter les fréquences en CSV.
+- Stocker les réponses sur le serveur pour que les élèves et l'enseignant voient le même nuage sur tous les appareils.
 
 ## Déploiement Cloudflare
 
-Le dépôt contient le code source, mais le partage en direct nécessite de déployer le Worker (un site statique GitHub Pages seul ne peut pas enregistrer les réponses de toute la classe dans une base commune).
+Le code est hébergé sur GitHub, mais il faut déployer l'application sur un serveur pour que la classe partage les mêmes réponses. Une simple page GitHub Pages ne fournit pas le stockage partagé nécessaire.
 
-1. Installe Node.js (version LTS) et Wrangler : `npm install -g wrangler`.
-2. Depuis la racine du dépôt, connecte-toi à Cloudflare : `wrangler login`.
-3. Déploie l'application : `wrangler deploy`.
-4. Wrangler publie le Worker sur une adresse `workers.dev`. Ouvre cette adresse pour créer une activité et partager le lien élève généré.
+1. Installe Node.js (version LTS).
+2. Clone le dépôt et ouvre un terminal à sa racine.
+3. Installe les dépendances : `npm install`.
+4. Connecte-toi à Cloudflare : `npx wrangler login`.
+5. Déploie : `npm run deploy`.
+6. À la fin du déploiement, ouvre l'adresse `workers.dev` indiquée par Wrangler. Crée une activité depuis cette page et copie le lien élève à partager.
 
-Le fichier `wrangler.toml` configure les fichiers statiques et le stockage durable des activités. La première publication crée la migration Durable Objects déclarée dans ce fichier.
+La configuration `wrangler.toml` sert le site statique et configure Durable Objects avec stockage SQLite pour les activités.
 
 ## Développement
 
-Le front-end n'a pas de dépendance de compilation. Pour tester localement avec le stockage Durable Objects de Wrangler :
-
-```bash
-wrangler dev
-```
+- `npm run dev` : lance l'application localement avec Wrangler.
+- `npm run check` : vérifie la syntaxe JavaScript.
+- Une vérification GitHub Actions exécute ces contrôles et un déploiement à blanc à chaque mise à jour de la branche principale.
 
 ## Confidentialité
 
-Les réponses sont anonymes dans l'interface : aucun nom n'est demandé. Les réponses brutes sont conservées pour permettre à un même navigateur de remplacer sa réponse ; seule la fréquence agrégée des mots est affichée publiquement. Ne demandez pas aux élèves de saisir des données personnelles dans leurs réponses.
+Aucun nom ni e-mail n'est demandé aux élèves. Le serveur conserve les réponses afin de compter les mots et de permettre une modification depuis le même navigateur ; l'API publique ne renvoie que les fréquences agrégées. Le lien élève est public : les personnes qui le possèdent peuvent participer tant que l'enseignant laisse les réponses ouvertes. Il est conseillé de rappeler aux élèves de ne pas saisir de données personnelles.
